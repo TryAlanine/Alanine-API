@@ -7,7 +7,7 @@ swagger: '2.0'
 schemes:
   - http # Remove if your API doesn't support HTTP
   - https # Remove if your API donsn't support HTTPS
-host: example.com # Replace with your hostname. You can also specify port e.g. example.com:777
+# host: example.com # Replace with your hostname. You can also specify port e.g. example.com:777
 basePath: /api/v1 # Replace with your basePath. Note: SHOULD begin with '/'.
 info:
   # Describe your API here, you can use GFM (https://guides.github.com/features/mastering-markdown) here
@@ -26,21 +26,18 @@ info:
     code, documentation, or through network traffic inspection. When properly defined via OpenAPI, a consumer can 
     understand and interact with the remote service with a minimal amount of implementation logic. Similar to what
     interfaces have done for lower-level programming, OpenAPI removes the guesswork in calling the service.
-
-  version: '1.0.0' # Your API version
+  version: '0.0.0' # Your API version
   # It can be any string but it is better to use semantic versioning: http://semver.org/
   # Warning: OpenAPI require version to be string, but without quotation YAML can recognize it as number.
 
-  title: Example.com # Replace with your API title
+  title: Alanine # Replace with your API title
   # Keep it simple. Don't add "API" or verison at the end of the string.
 
-  termsOfService: 'https://example.com/terms/' # [Optional] Replace with an URL to your ToS
   contact:
-    email: contact@example.com # [Optional] Replace with your contact email
-    url: 'http://example.com/contact' # [Optional] Replace with link to your contact form
+    email: leaferx@outlook.com # [Optional] Replace with your contact email
   license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    name: MIT
+    url: 'https://tryalanine.github.io/Alanine-API/LICENSE'
   x-logo:
     url: 'https://apis.guru/openapi-template/logo.png'
 externalDocs:
