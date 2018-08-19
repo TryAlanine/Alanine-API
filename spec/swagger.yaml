@@ -15,52 +15,33 @@ info:
 # host: petstore.swagger.io
 basePath: /api
 tags:
-- name: pet
-  description: Everything about your Pets
-  externalDocs:
-    description: Find out more
-    url: http://swagger.io
-- name: store
-  description: Access to Petstore orders
+- name: users
+  description: Operations about users
 - name: user
-  description: Operations about user
-  externalDocs:
-    description: Find out more about our store
-    url: http://swagger.io
-# schemes:
-# - http
+  description: Operations about current logined user
+- name: posts
+  description: Operations about posts
+- name: comments
+  description: Operations about comments
+schemes:
+- https
 paths:
-  /pet:
-    post:
+  /users:
+    get:
       tags:
-      - pet
-      summary: Add a new pet to the store
-      operationId: addPet
-      consumes:
-      - application/json
-      - application/xml
+      - users
+      summary: List all users
+      operationId: listUsers
       produces:
       - application/json
-      - application/xml
-      parameters:
-      - in: body
-        name: body
-        description: Pet object that needs to be added to the store
-        required: true
-        schema:
-          $ref: '#/definitions/Pet'
       responses:
-        405:
-          description: Invalid input
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-    put:
+        200:
+          description: successful operation
+    post:
       tags:
-      - pet
-      summary: Update an existing pet
-      operationId: updatePet
+      - users
+      summary: Create a new user
+      operationId: createUser
       consumes:
       - application/json
       - application/xml
@@ -383,7 +364,7 @@ paths:
       - user
       summary: Create user
       description: This can only be done by the logged in user.
-      operationId: createUser
+      operationId: createUse
       produces:
       - application/json
       - application/xml
