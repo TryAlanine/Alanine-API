@@ -12,8 +12,8 @@ info:
   license:
     name: MIT
     url: https://github.com/TryAlanine/Alanine/blob/master/LICENSE
-# host: your_alanine_server.com
-# basePath: /api
+host: your_alanine_server.com
+basePath: /api
 tags:
 - name: users
   description: Operations about users
