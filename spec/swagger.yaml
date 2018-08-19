@@ -11,8 +11,8 @@ info:
     email: leaferx@outlook.com
   license:
     name: MIT
-    url: https://github.com/TryAlanine/Alanine/LICENSE
-# host: petstore.swagger.io
+    url: https://github.com/TryAlanine/Alanine/blob/master/LICENSE
+host: your_alanine_aerver.com
 basePath: /api
 tags:
 - name: users
