@@ -12,8 +12,8 @@ info:
   license:
     name: MIT
     url: https://github.com/TryAlanine/Alanine/blob/master/LICENSE
-host: your_alanine_aerver.com
-basePath: /api
+# host: your_alanine_server.com
+# basePath: /api
 tags:
 - name: users
   description: Operations about users
@@ -35,7 +35,7 @@ paths:
       produces:
       - application/json
       responses:
-        200:
+        default:
           description: successful operation
     post:
       tags:
@@ -673,3 +673,6 @@ definitions:
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /LEAFERx/alanine/0.0.0
