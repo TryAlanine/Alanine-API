@@ -1,0 +1,453 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a RESTful API specification used by [Alanine Commenting System](https://github.com/TryAlanine/Alanine).\n",
+    "version": "0.0.0",
+    "title": "Alanine",
+    "contact": {
+      "email": "leaferx@outlook.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/TryAlanine/Alanine/blob/master/LICENSE"
+    }
+  },
+  "host": "your_alanine_server.com",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "users",
+      "description": "Operations about users"
+    },
+    {
+      "name": "user",
+      "description": "Operations about current logined user"
+    },
+    {
+      "name": "posts",
+      "description": "Operations about posts"
+    },
+    {
+      "name": "comments",
+      "description": "Operations about comments"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "List all users",
+        "operationId": "listUsers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "description": "query string",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "quer",
+            "description": "query string",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "admin"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create a new user",
+        "operationId": "createUser",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user-register"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Object invalid"
+          }
+        }
+      }
+    },
+    "/users/{username}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get user by username",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "List all posts",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/post"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/{url}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "url",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "posts"
+        ],
+        "description": "Get post by url",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/post"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "posts"
+        ],
+        "description": "Delete post by url",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/posts/{url}/comments": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "url",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Get comments in post specified by url",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/comment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comments": {
+      "post": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Create a new comment",
+        "operationId": "createComment",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created comment object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/comment-create"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Get comment by id",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Modify a existed comment",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/comment-patch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Delete a existed comment",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "authorizationUrl": "https://your_alanine_server.com/oauth/",
+      "flow": "implicit",
+      "scopes": {
+        "admin": "administrator right"
+      }
+    }
+  },
+  "definitions": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "Date"
+        }
+      }
+    },
+    "user-register": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "post": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "comment-create": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "ua": {
+          "type": "object",
+          "properties": {
+            "browser": {
+              "type": "string"
+            },
+            "os": {
+              "type": "string"
+            }
+          }
+        },
+        "username": {
+          "type": "string"
+        },
+        "post_url": {
+          "type": "string"
+        }
+      }
+    },
+    "comment": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "ua": {
+          "type": "object",
+          "properties": {
+            "browser": {
+              "type": "string"
+            },
+            "os": {
+              "type": "string"
+            }
+          }
+        },
+        "username": {
+          "type": "string"
+        },
+        "post_url": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "is_modified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "comment-patch": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Alanine",
+    "url": "https://tryanaline.github.io/"
+  }
+}
